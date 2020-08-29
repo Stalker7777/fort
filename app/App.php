@@ -2,16 +2,25 @@
 
 include ($dir_root . '/controllers/SiteController.php');
 
+/**
+ * Class App
+ */
 class App
 {
     private $dir_root;
     private $data;
     
+    /**
+     * App constructor.
+     */
     public function __construct()
     {
         $this->dir_root = $_SERVER['DOCUMENT_ROOT'];
     }
     
+    /**
+     *
+     */
     public function run()
     {
         $controller = new SiteController();
@@ -25,6 +34,9 @@ class App
         switch ($page) {
             case 'index':
                 $content = $controller->index();
+                break;
+            case 'create':
+                $content = $controller->create();
                 break;
             default:
                 $content = $controller->index();

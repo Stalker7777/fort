@@ -1,6 +1,10 @@
 <div id="form_table_objects">
     <h1>Список объектов</h1>
-    
+
+    <div class="form-group">
+        <a href="index.php?page=create" class="btn btn-success">Создать</a>
+    </div>
+
     <div class="text-danger form-group">
         <?= $this->data['error_text'] ?>
     </div>

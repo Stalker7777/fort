@@ -3,9 +3,15 @@
 include ($dir_root . '/controllers/Controller.php');
 include ($dir_root . '/models/SiteModel.php');
 
+/**
+ * Class SiteController
+ */
 class SiteController extends Controller
 {
-    public function index()
+    /**
+     * @return array
+     */
+    public function index(): array
     {
         $model = new SiteModel();
         
@@ -28,4 +34,46 @@ class SiteController extends Controller
                     ]
             ];
     }
+    
+    /**
+     * @return array
+     */
+    public function create(): array
+    {
+        $model = new SiteModel();
+        
+        if($this->isPost()) {
+            
+            $model->load($_POST);
+            
+            $result = $model->valid();
+            
+            if($result['error']) {
+                $error_text = $result['message'];
+            }
+            else {
+                
+                $result = $model->insert();
+                
+                if($result['error']) {
+                    $error_text = $result['message'];
+                }
+                else {
+                    $this->redirect('index.php');
+                }
+            }
+        }
+        
+        return
+            [
+                'view' => '/views/site/create.php',
+                'params' =>
+                    [
+                        'error_text' => $error_text,
+                        'name' => $model->name,
+                        'note' => $model->note,
+                    ]
+            ];
+    }
+    
 }
