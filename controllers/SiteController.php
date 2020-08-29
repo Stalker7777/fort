@@ -9,13 +9,36 @@ include ($dir_root . '/models/SiteModel.php');
 class SiteController extends Controller
 {
     /**
+     * list objects
+     *
      * @return array
      */
     public function index(): array
     {
         $model = new SiteModel();
-        
-        $result = $model->select();
+    
+        $find_name = null;
+        $find_note = null;
+    
+        if(isset($_POST['find_name'])) {
+            $find_name = $_POST['find_name'];
+        }
+    
+        if(isset($_POST['find_note'])) {
+            $find_note = $_POST['find_note'];
+        }
+    
+        $find = null;
+    
+        if(!is_null($find_name)) {
+            $find['name'] = $find_name;
+        }
+    
+        if(!is_null($find_note)) {
+            $find['note'] = $find_note;
+        }
+
+        $result = $model->select($find);
         
         if($result['error']) {
             $error_text = $result['message'];
@@ -31,11 +54,15 @@ class SiteController extends Controller
                     [
                         'error_text' => $error_text,
                         'rows' => $rows,
+                        'find_name' => $find_name,
+                        'find_note' => $find_note,
                     ]
             ];
     }
     
     /**
+     * create object
+     *
      * @return array
      */
     public function create(): array
@@ -77,6 +104,8 @@ class SiteController extends Controller
     }
     
     /**
+     * delete object
+     *
      * @param int $id
      */
     public function delete(int $id)

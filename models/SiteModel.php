@@ -11,6 +11,8 @@ class SiteModel extends Model
     public $note;
     
     /**
+     * get data from form
+     *
      * @param array|null $post
      */
     public function load(array $post = null)
@@ -25,6 +27,8 @@ class SiteModel extends Model
     }
     
     /**
+     * ckecked data from form
+     *
      * @return array
      */
     public function valid(): array
@@ -47,6 +51,8 @@ class SiteModel extends Model
     }
     
     /**
+     * add object to DB
+     *
      * @return array
      */
     public function insert(): array
@@ -59,18 +65,35 @@ class SiteModel extends Model
     }
     
     /**
+     * select list object from DB
+     *
+     * @param array|null $find
      * @return array
      */
-    public function select(): array
+    public function select(array $find = null): array
     {
         $fields = ['id', 'name', 'note'];
-
-        $sql = "SELECT * FROM objects";
+    
+        if($find == null) {
+            $sql = "SELECT * FROM objects";
+        }
+        else {
+        
+            $finds = [];
+        
+            foreach ($find as $key => $value) {
+                $finds[] = " " . $key . " like '%" . $value . "%' ";
+            }
+        
+            $sql = "SELECT * FROM objects WHERE " . implode(' AND ', $finds);
+        }
         
         return $this->selectSQL($fields, $sql);
     }
     
     /**
+     * delete object in DB
+     *
      * @param int $id
      * @return array
      */

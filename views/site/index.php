@@ -9,6 +9,23 @@
         <?= $this->data['error_text'] ?>
     </div>
 
+    <form action="index.php?page=select" method="post">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Наименование</label>
+                <input class="form-control" name="find_name" type="text" value="<?= $this->data['find_name'] ?>">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Описание</span></label>
+                <input class="form-control" name="find_note" type="text" value="<?= $this->data['find_note'] ?>">
+            </div>
+        </div>
+        <div class="form-group text-right">
+            <input type="submit" name="submit" value="Найти" class="btn btn-success">
+            <a href="index.php" class="btn btn-primary">Отмена</a>
+        </div>
+    </form>
+
     <div id="table_objects">
         <table class="table table-bordered">
             <thead>
