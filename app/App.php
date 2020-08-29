@@ -38,6 +38,13 @@ class App
             case 'create':
                 $content = $controller->create();
                 break;
+            case 'delete':
+                $id = null;
+                if(isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                }
+                $content = $controller->delete($id);
+                break;
             default:
                 $content = $controller->index();
         }

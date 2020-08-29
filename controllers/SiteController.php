@@ -76,4 +76,16 @@ class SiteController extends Controller
             ];
     }
     
+    /**
+     * @param int $id
+     */
+    public function delete(int $id)
+    {
+        $model = new SiteModel();
+        
+        $model->delete($id);
+        
+        $this->redirect('index.php');
+    }
+    
 }

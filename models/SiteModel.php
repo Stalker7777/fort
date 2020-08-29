@@ -70,5 +70,17 @@ class SiteModel extends Model
         return $this->selectSQL($fields, $sql);
     }
     
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function delete(int $id): array
+    {
+        if($id == null) return [];
+        
+        $sql = "DELETE FROM objects WHERE id = $id;";
+        
+        return $this->execSQL($sql);
+    }
     
 }

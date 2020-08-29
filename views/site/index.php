@@ -15,6 +15,7 @@
                 <tr>
                     <th class="text-center">Наименование</th>
                     <th class="text-center">Описание</th>
+                    <th class="text-center">Действия</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,11 @@
                 <tr>
                     <td><?= $item['name'] ?></td>
                     <td><?= $item['note'] ?></td>
+                    <td class="text-center">
+                        <a href="index.php?page=delete&id=<?= $item['id'] ?>" class="btn btn-outline-primary" onClick="return window.confirm('Удалить запись?');">
+                            <span class="glyphicon glyphicon-trash">Удалить</span>
+                        </a>
+                    </td>
                 </tr>
             <?php } ?>
             </tbody>
